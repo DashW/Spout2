@@ -1428,7 +1428,14 @@ bool spoutGLDXinterop::WriteTexture(ID3D11Texture2D** texture, bool bInvert)
 
 	if(!g_pImmediateContext)
 	{
-		g_pd3dDevice->GetImmediateContext(&g_pImmediateContext);
+		if (g_pd3dDevice)
+		{
+			g_pd3dDevice->GetImmediateContext(&g_pImmediateContext);
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	// Wait for access to the texture
